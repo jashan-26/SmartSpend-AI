@@ -222,11 +222,11 @@ def render_auth(mode="login"):
                     st.error("Invalid credentials or user doesn't exist.")
                     
             st.markdown("<hr style='border-color: rgba(255,255,255,0.1);'>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #A991D4;'>Don't have an account?</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #A991D4; margin-bottom: 5px;'>Don't have an account?</p>", unsafe_allow_html=True)
             
-            # Center the secondary button perfectly
-            with st.container():
-                if st.button("Create Account safely"):
+            c1, c2, c3 = st.columns([1, 1.2, 1])
+            with c2:
+                if st.button("Create Account safely", use_container_width=True):
                     navigate_to("signup")
                 
         elif mode == "signup":
@@ -248,10 +248,11 @@ def render_auth(mode="login"):
                         st.error(msg)
                         
             st.markdown("<hr style='border-color: rgba(255,255,255,0.1);'>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #A991D4;'>Already highly ranked?</p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #A991D4; margin-bottom: 5px;'>Already highly ranked?</p>", unsafe_allow_html=True)
             
-            with st.container():
-                if st.button("Log In safely"):
+            c1, c2, c3 = st.columns([1, 1.2, 1])
+            with c2:
+                if st.button("Log In safely", use_container_width=True):
                     navigate_to("login")
                 
 
