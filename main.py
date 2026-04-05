@@ -120,11 +120,11 @@ def navigate_to(page_name):
 # ----------------- NAVIGATION BAR -----------------
 def render_navbar():
     # Top navigation layout
-    col_logo, col_space, col_nav1, col_nav2 = st.columns([2, 4.5, 1.5, 1.5])
+    col_logo, col_space, col_nav1, col_nav2 = st.columns([3, 5.5, 0.8, 0.8])
     
     with col_logo:
         # Clickable logo simulation
-        st.markdown("<h3 style='margin-top:0; color:white;'>🌌 SmartSpend AI</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='margin-top:-5px; color:white; white-space: nowrap;'>🌌 SmartSpend AI</h3>", unsafe_allow_html=True)
         
     if st.session_state['user'] is None:
         with col_nav1:
@@ -145,9 +145,12 @@ def render_navbar():
 
 # ----------------- VIEW: LANDING -----------------
 def render_landing():
-    st.markdown("<div style='text-align: center; padding: 10px 0;'>", unsafe_allow_html=True)
-    st.markdown("<h1 class='gradient-text'>SmartSpend AI</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='color: #E2D9F3; font-weight: 400; margin-bottom: 30px;'>Spend Smart. Plan Smarter.</h3>", unsafe_allow_html=True)
+    st.markdown("""
+        <div style='text-align: center; margin-top: -30px; margin-bottom: 10px;'>
+            <h1 class='gradient-text'>SmartSpend AI</h1>
+            <h3 style='color: #E2D9F3; font-weight: 400; margin-bottom: 30px;'>Spend Smart. Plan Smarter.</h3>
+        </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("""
         <div class='glass-card' style='max-width: 800px; margin: 0 auto; text-align: center;'>
