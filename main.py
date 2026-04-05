@@ -43,10 +43,11 @@ div.stButton > button:first-child {
     color: white;
     border: none;
     border-radius: 30px;
-    padding: 10px 24px;
+    padding: 8px 16px;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+    white-space: nowrap;
 }
 div.stButton > button:first-child:hover {
     transform: translateY(-2px);
@@ -119,8 +120,7 @@ def navigate_to(page_name):
 # ----------------- NAVIGATION BAR -----------------
 def render_navbar():
     # Top navigation layout
-    st.markdown("<div style='padding-bottom: 20px;'></div>", unsafe_allow_html=True)
-    col_logo, col_space, col_nav1, col_nav2 = st.columns([2, 5, 1, 1])
+    col_logo, col_space, col_nav1, col_nav2 = st.columns([2, 4.5, 1.5, 1.5])
     
     with col_logo:
         # Clickable logo simulation
@@ -145,9 +145,9 @@ def render_navbar():
 
 # ----------------- VIEW: LANDING -----------------
 def render_landing():
-    st.markdown("<div style='text-align: center; padding: 60px 0;'>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: center; padding: 10px 0;'>", unsafe_allow_html=True)
     st.markdown("<h1 class='gradient-text'>SmartSpend AI</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='color: #E2D9F3; font-weight: 400; margin-bottom: 40px;'>Spend Smart. Plan Smarter.</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: #E2D9F3; font-weight: 400; margin-bottom: 30px;'>Spend Smart. Plan Smarter.</h3>", unsafe_allow_html=True)
     
     st.markdown("""
         <div class='glass-card' style='max-width: 800px; margin: 0 auto; text-align: center;'>
@@ -195,7 +195,6 @@ def render_auth(mode="login"):
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.markdown("<div style='height: 30px;'></div>", unsafe_allow_html=True)
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
         
         if mode == "login":
             st.markdown("<h2 style='text-align: center;'>Welcome Back</h2>", unsafe_allow_html=True)
@@ -214,8 +213,8 @@ def render_auth(mode="login"):
             st.markdown("<hr style='border-color: rgba(255,255,255,0.1);'>", unsafe_allow_html=True)
             st.markdown("<p style='text-align: center; color: #A991D4;'>Don't have an account?</p>", unsafe_allow_html=True)
             
-            # Center the secondary button
-            col_b1, col_b2, col_b3 = st.columns([1, 2, 1])
+            # Center the secondary button perfectly
+            col_b1, col_b2, col_b3 = st.columns([1, 1.5, 1])
             with col_b2:
                 if st.button("Create Account safely"):
                     navigate_to("signup")
@@ -241,12 +240,12 @@ def render_auth(mode="login"):
             st.markdown("<hr style='border-color: rgba(255,255,255,0.1);'>", unsafe_allow_html=True)
             st.markdown("<p style='text-align: center; color: #A991D4;'>Already highly ranked?</p>", unsafe_allow_html=True)
             
-            col_b1, col_b2, col_b3 = st.columns([1, 2, 1])
+            col_b1, col_b2, col_b3 = st.columns([1, 1.3, 1])
             with col_b2:
                 if st.button("Log In safely"):
                     navigate_to("login")
                 
-        st.markdown("</div>", unsafe_allow_html=True)
+
 
 # ----------------- VIEW: DASHBOARD -----------------
 def render_dashboard():
