@@ -82,30 +82,32 @@ if 'user' not in st.session_state:
     
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.markdown("### 🔐 Security & Access")
-        tab1, tab2 = st.tabs(["Login", "Sign Up"])
-        with tab1:
-            u_login = st.text_input("Username", key="login_u")
-            p_login = st.text_input("Password", type="password", key="login_p")
+        st.markdown("<h3 style='text-align: center; color: #2F4F4F;'>🔐 Security & Access</h3>", unsafe_allow_html=True)
+        
+        st.markdown("#### Login")
+        u_login = st.text_input("Username", key="login_u")
+        p_login = st.text_input("Password", type="password", key="login_p")
+        
+        if st.button("Access Dashboard", type="primary", use_container_width=True):
+            if authenticate_user(u_login, p_login):
+                st.session_state['user'] = u_login
+                st.rerun()
+            else:
+                st.error("Invalid credentials or user doesn't exist!")
+                
+        st.markdown("<hr style='margin: 30px 0;'>", unsafe_allow_html=True)
+        st.markdown("#### New User?")
+        with st.expander("Click here to Sign Up & Create Account"):
+            u_reg = st.text_input("Choose Username", key="reg_u")
+            p_reg = st.text_input("Choose Password", type="password", key="reg_p")
             
-            if st.button("Access Dashboard", type="primary"):
-                if authenticate_user(u_login, p_login):
-                    st.session_state['user'] = u_login
-                    st.rerun()
-                else:
-                    st.error("Invalid credentials or user doesn't exist!")
-                    
-        with tab2:
-            u_reg = st.text_input("New Username", key="reg_u")
-            p_reg = st.text_input("New Password", type="password", key="reg_p")
-            
-            if st.button("Create Account"):
+            if st.button("Create Account", use_container_width=True):
                 if not u_reg or not p_reg:
                     st.error("Please enter a username and password!")
                 else:
                     success, msg = register_user(u_reg, p_reg)
                     if success:
-                        st.success(msg + " You can now log in.")
+                        st.success(msg + " You can now log in above!")
                     else:
                         st.error(msg)
     st.stop()
