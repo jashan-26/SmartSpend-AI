@@ -114,7 +114,7 @@ def chatbot_response(username, user_input, api_key=None):
         try:
             import google.generativeai as genai
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
+            model = genai.GenerativeModel("gemini-pro")
             
             total_spent = df['Amount'].sum() if not df.empty else 0
             if not df.empty:
