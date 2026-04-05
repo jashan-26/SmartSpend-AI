@@ -19,6 +19,10 @@ custom_style = """
     color: #E2D9F3;
     font-family: 'Inter', sans-serif;
 }
+.block-container {
+    padding-top: 1.5rem !important;
+    max-width: 95% !important;
+}
 
 /* Hide Default Headers */
 #MainMenu {visibility: hidden;}
@@ -38,6 +42,10 @@ header {background: transparent !important;}
 }
 
 /* Stylish Gradient Buttons */
+div.stButton {
+    display: flex;
+    justify-content: center;
+}
 div.stButton > button:first-child {
     background: linear-gradient(90deg, #8E2DE2 0%, #4A00E0 100%);
     color: white;
@@ -217,8 +225,7 @@ def render_auth(mode="login"):
             st.markdown("<p style='text-align: center; color: #A991D4;'>Don't have an account?</p>", unsafe_allow_html=True)
             
             # Center the secondary button perfectly
-            col_b1, col_b2, col_b3 = st.columns([1, 1.5, 1])
-            with col_b2:
+            with st.container():
                 if st.button("Create Account safely"):
                     navigate_to("signup")
                 
@@ -243,8 +250,7 @@ def render_auth(mode="login"):
             st.markdown("<hr style='border-color: rgba(255,255,255,0.1);'>", unsafe_allow_html=True)
             st.markdown("<p style='text-align: center; color: #A991D4;'>Already highly ranked?</p>", unsafe_allow_html=True)
             
-            col_b1, col_b2, col_b3 = st.columns([1, 1.3, 1])
-            with col_b2:
+            with st.container():
                 if st.button("Log In safely"):
                     navigate_to("login")
                 
