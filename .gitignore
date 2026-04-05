@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+
+# Ignore user isolated data but retain the data folder
+data/*
+!data/.gitkeep
+
+# Environments
+.env
+venv/
+env/
+.venv/
