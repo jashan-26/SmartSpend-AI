@@ -128,7 +128,7 @@ def navigate_to(page_name):
 # ----------------- NAVIGATION BAR -----------------
 def render_navbar():
     # Top navigation layout
-    col_logo, col_space, col_nav1, col_nav2 = st.columns([3, 5.5, 0.8, 0.8])
+    col_logo, col_space, col_nav1, col_nav2 = st.columns([3.5, 4.5, 1.2, 1.2])
     
     with col_logo:
         # Clickable logo simulation
