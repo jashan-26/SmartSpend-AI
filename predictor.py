@@ -100,61 +100,14 @@ def generate_financial_advice(username):
         
     return advice
 
-def chatbot_response(username, user_input, api_key=None):
+def chatbot_response(username, user_input):
     """
     Advanced Heuristic-based AI chatbot that correlates Salary, Spending, and Goals.
-    If api_key is provided, connects to a native LLM for ChatGPT-level reasoning.
     """
     df = load_data(username)
     profile = get_user_profile(username)
     salary = profile.get("salary", 0)
     
-    # ---------------- TRUE LLM OVERRIDE ----------------
-    if api_key and api_key.strip():
-        try:
-            import google.generativeai as genai
-            genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-pro")
-            
-            total_spent = df['Amount'].sum() if not df.empty else 0
-            if not df.empty:
-                cat_totals = df.groupby('Category')['Amount'].sum()
-                highest_cat = cat_totals.idxmax()
-                highest_amt = cat_totals.max()
-            else:
-                highest_cat = "None"
-                highest_amt = 0
-                
-            budget, _ = predict_next_month_budget(username)
-            budget = max(budget, 1)
-            
-            goals_df = load_goals(username)
-            monthly_goal_req = 0
-            if not goals_df.empty:
-                goals_df['MonthlyNeeded'] = goals_df['TargetAmount'] / goals_df['MonthsLeft'].replace(0, 1)
-                monthly_goal_req = goals_df['MonthlyNeeded'].sum()
-                
-            context = f'''You are "SmartSpend AI Core", a brilliant, witty, and highly intelligent AI financial advisor.
-Your client's name: {username}.
-Monthly Income logged: ₹{salary:,.2f}.
-Total Spent so far: ₹{total_spent:,.2f}.
-Apex Spending Category: {highest_cat} (₹{highest_amt:,.2f}).
-AI Forecasted Safe Budget: ₹{budget:,.2f}.
-Required Monthly Savings for Active Goals: ₹{monthly_goal_req:,.2f}.
-
-RULES:
-- Talk like ChatGPT (friendly, expert, direct).
-- Provide financial advice specifically tailored to these numbers.
-- If they ask if they overspent, mathematically check if Total Spent > AI Forecasted Budget.
-- Keep it concise, incredibly smart, and format your output with Markdown/Emojis for a SaaS dashboard look.
-'''
-            prompt = context + f"\n\nClient Query: {user_input}"
-            response = model.generate_content(prompt)
-            return response.text
-        except Exception as e:
-            return f"❌ **Neural Link Failed:** Could not connect to Gemini API. Check your key. Error: {str(e)}"
-            
-    # ---------------- FALLBACK HEURISTICS ----------------
     user_input = user_input.lower()
     
     # Advanced logic for overspending calculation
