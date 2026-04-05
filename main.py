@@ -3,32 +3,6 @@ import pandas as pd
 import plotly.express as px
 from datetime import datetime
 import io
-import base64
-
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
-
-def set_app_background():
-    try:
-        bin_str = get_base64_of_bin_file('money_background.png')
-        page_bg_img = f'''
-        <style>
-        .stApp {{
-          background-image: url("data:image/png;base64,{bin_str}");
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-color: rgba(255, 255, 255, 0.82) !important; /* Forces 82% white overlay for high text legibility */
-          background-blend-mode: screen !important;
-        }}
-        </style>
-        '''
-        st.markdown(page_bg_img, unsafe_allow_html=True)
-    except:
-        pass
 
 from data_handler import authenticate_user, register_user, get_user_profile, save_user_profile, load_goals, save_goal, delete_goal, load_bills, save_bill, delete_bill, load_data, save_expense, save_bulk_expenses, clear_all_data, get_csv_content
 from expense_manager import auto_categorize, get_category_totals, get_monthly_totals, get_highest_spending_category, CATEGORIES
@@ -74,15 +48,15 @@ custom_style = """
        </style>
 """
 st.markdown(custom_style, unsafe_allow_html=True)
-set_app_background()
 
 # ----------------- LOGIN SYSTEM -----------------
 if 'user' not in st.session_state:
-    st.markdown("<div style='text-align: center; padding: 50px;'><h1 style='color: #3EB489; font-size: 3.5rem;'>SmartSpend AI</h1><p>Plan Smart. Spend Smarter.</p></div>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: center; padding: 50px;'><h1 style='color: #3EB489; font-size: 3.5rem;'>SmartSpend AI</h1><p style='color: gray; font-size: 1.2rem;'>Plan Smart. Spend Smarter.</p></div>", unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.markdown("<h3 style='text-align: center; color: #2F4F4F;'>🔐 Security & Access</h3>", unsafe_allow_html=True)
+        st.info("💡 **Welcome to the Cloud Demo!** Every time you open this page, the platform provides a totally fresh, isolated sandbox. **Please 'Sign Up' below to start your session!**")
+        st.markdown("<h3 style='text-align: center; color: #3EB489;'>🔐 Security & Access</h3>", unsafe_allow_html=True)
         
         st.markdown("#### Login")
         u_login = st.text_input("Username", key="login_u")
