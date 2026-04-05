@@ -88,7 +88,7 @@ if 'user' not in st.session_state:
         u_login = st.text_input("Username", key="login_u")
         p_login = st.text_input("Password", type="password", key="login_p")
         
-        if st.button("Access Dashboard", type="primary", use_container_width=True):
+        if st.button("Access Dashboard"):
             if authenticate_user(u_login, p_login):
                 st.session_state['user'] = u_login
                 st.rerun()
@@ -101,7 +101,7 @@ if 'user' not in st.session_state:
             u_reg = st.text_input("Choose Username", key="reg_u")
             p_reg = st.text_input("Choose Password", type="password", key="reg_p")
             
-            if st.button("Create Account", use_container_width=True):
+            if st.button("Create Account"):
                 if not u_reg or not p_reg:
                     st.error("Please enter a username and password!")
                 else:
