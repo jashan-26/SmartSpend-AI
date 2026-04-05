@@ -454,6 +454,21 @@ def render_dashboard():
     elif menu == "💬 AI Context Advisor":
         st.markdown("<h2 style='color:#FF007F;'>Context Engine Active</h2>", unsafe_allow_html=True)
         
+        if "gemini_api_key" not in st.session_state:
+            st.session_state['gemini_api_key'] = ""
+            
+        with st.expander("🔑 Unlock True AI Reasoning (Free)", expanded=(not st.session_state['gemini_api_key'])):
+            st.markdown("To enable ChatGPT-level conversational AI and unbounded financial analysis, get a completely free [Google Gemini API Key here](https://aistudio.google.com/app/apikey).")
+            new_key = st.text_input("Gemini API Key", type="password", value=st.session_state['gemini_api_key'])
+            if new_key != st.session_state['gemini_api_key']:
+                st.session_state['gemini_api_key'] = new_key
+                st.rerun()
+                
+        if not st.session_state['gemini_api_key']:
+            st.info("ℹ️ Running in Basic Heuristics Mode. Provide an API key above to unlock unrestricted conversational analysis.")
+        else:
+            st.success("✅ Neural Link Established. AI is actively analyzing your spending matrix.")
+            
         if "messages" not in st.session_state:
             st.session_state.messages = []
             
@@ -461,10 +476,10 @@ def render_dashboard():
             with st.chat_message(msg["role"]):
                 st.markdown(msg["content"])
                 
-        if prompt := st.chat_input("Query the system..."):
+        if prompt := st.chat_input("Query the system (e.g., 'Did I overspend?')..."):
             st.chat_message("user").markdown(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
-            resp = chatbot_response(USERNAME, prompt)
+            resp = chatbot_response(USERNAME, prompt, api_key=st.session_state['gemini_api_key'])
             with st.chat_message("assistant"):
                 st.markdown(resp)
             st.session_state.messages.append({"role": "assistant", "content": resp})
