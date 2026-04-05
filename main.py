@@ -64,6 +64,12 @@ div.stButton > button:first-child:hover {
     color: white;
 }
 
+/* Custom Animations */
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
 /* Text Inputs Dark Glass */
 div[data-baseweb="input"] {
     background-color: rgba(0, 0, 0, 0.4) !important;
@@ -127,25 +133,30 @@ def navigate_to(page_name):
 
 # ----------------- NAVIGATION BAR -----------------
 def render_navbar():
-    # Top navigation layout
-    col_logo, col_space, col_nav1, col_nav2 = st.columns([3.5, 4.5, 1.2, 1.2])
-    
-    with col_logo:
-        # Clickable logo simulation
-        st.markdown("<h3 style='margin-top:-5px; color:white; white-space: nowrap;'>🌌 SmartSpend AI</h3>", unsafe_allow_html=True)
-        
     if st.session_state['user'] is None:
+        col_logo, col_space, col_nav1, col_nav2 = st.columns([3.5, 5.0, 0.9, 0.9])
+        with col_logo:
+            st.markdown("<h3 style='margin-top:-5px; color:white; white-space: nowrap;'>🌌 SmartSpend AI</h3>", unsafe_allow_html=True)
+            
         with col_nav1:
+            st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
             if st.button("Login"):
                 navigate_to("login")
         with col_nav2:
+            st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
             if st.button("Sign Up"):
                 navigate_to("signup")
     else:
+        col_logo, col_space, col_nav1, col_nav2 = st.columns([3.5, 4.5, 1.2, 1.2])
+        with col_logo:
+            st.markdown("<h3 style='margin-top:-5px; color:white; white-space: nowrap;'>🌌 SmartSpend AI</h3>", unsafe_allow_html=True)
+            
         with col_nav1:
+            st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
             if st.button("Dashboard"):
                 navigate_to("dashboard")
         with col_nav2:
+            st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
             if st.button("Logout"):
                 st.session_state['user'] = None
                 navigate_to("landing")
@@ -154,14 +165,14 @@ def render_navbar():
 # ----------------- VIEW: LANDING -----------------
 def render_landing():
     st.markdown("""
-        <div style='text-align: center; margin-top: -30px; margin-bottom: 10px;'>
+        <div style='text-align: center; margin-top: -30px; margin-bottom: 10px; opacity: 0; animation: slideUpFade 0.8s ease-out forwards;'>
             <h1 class='gradient-text'>SmartSpend AI</h1>
             <h3 style='color: #E2D9F3; font-weight: 400; margin-bottom: 30px;'>Spend Smart. Plan Smarter.</h3>
         </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
-        <div class='glass-card' style='max-width: 800px; margin: 0 auto; text-align: center;'>
+        <div class='glass-card' style='max-width: 800px; margin: 0 auto; text-align: center; opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.2s;'>
             <h3>Welcome to the Future of Finance</h3>
             <p style='color: #E2D9F3; font-size: 1.1rem; line-height: 1.6;'>
             SmartSpend AI leverages contextual machine learning and heuristic analysis to transform your financial habits. 
@@ -169,33 +180,32 @@ def render_landing():
             </p>
         </div>
     """, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
     
     # Feature Grid
-    st.markdown("<h2 style='text-align: center; margin-bottom: 30px;'>Core Architecture</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-bottom: 30px; opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.4s;'>Core Architecture</h2>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""
-        <div class='glass-card'>
+        <div class='glass-card' style='opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.5s;'>
             <h4>🤖 AI-Powered Guidance</h4>
             <p style='color:#A991D4;'>Context-aware chatbots analyze your goals and burns rates.</p>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("""
-        <div class='glass-card'>
+        <div class='glass-card' style='opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.7s;'>
             <h4>🎯 Goal-Oriented Planning</h4>
             <p style='color:#A991D4;'>Set timelines for gadgets, cars, or trips and track monthly targets.</p>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div class='glass-card'>
+        <div class='glass-card' style='opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.6s;'>
             <h4>📈 Expense Predictor</h4>
             <p style='color:#A991D4;'>Predict next month's budget using Time-Series Linear Regression.</p>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("""
-        <div class='glass-card'>
+        <div class='glass-card' style='opacity: 0; animation: slideUpFade 0.8s ease-out forwards; animation-delay: 0.8s;'>
             <h4>📅 Subscription Tracker</h4>
             <p style='color:#A991D4;'>Never let an auto-renewal catch you off guard again.</p>
         </div>
