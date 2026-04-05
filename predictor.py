@@ -187,5 +187,9 @@ def chatbot_response(username, user_input):
         return "I need more data to tell you your highest expense."
     elif "hello" in user_input or "hi" in user_input or "hey" in user_input:
         return "Hello! I am your AI Financial Advisor. Ask me for tips on saving, your highest expenses, or your budget prediction!"
+    elif "okay" in user_input or "ok" == user_input.strip() or "cool" in user_input or "nice" in user_input or "awesome" in user_input:
+        return "Got it! Feel free to ask me to analyze your latest spending or check your monthly budget."
+    elif "thank" in user_input or "thx" in user_input:
+        return "You're very welcome! I'm always here to help you optimize your wealth. 🚀"
     else:
         return "I'm still learning! Right now, you can ask me about your 'budget', how to 'save' money, or your 'highest' expenses."
