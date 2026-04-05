@@ -454,18 +454,6 @@ def render_dashboard():
     elif menu == "💬 AI Context Advisor":
         st.markdown("<h2 style='color:#FF007F;'>Context Engine Active</h2>", unsafe_allow_html=True)
         
-        # Fetch shared server API key from Streamlit secrets
-        server_api_key = ""
-        try:
-            server_api_key = st.secrets.get("GEMINI_API_KEY", "")
-        except:
-            pass
-            
-        if not server_api_key:
-            st.error("⚠️ SYSTEM ADMIN: 'GEMINI_API_KEY' not found in Streamlit Secrets. The chat will run in limited offline mode.")
-        else:
-            st.success("✅ Neural Link Established. Context Engine is analyzing your unique data.")
-            
         if "messages" not in st.session_state:
             st.session_state.messages = []
             
@@ -473,10 +461,10 @@ def render_dashboard():
             with st.chat_message(msg["role"]):
                 st.markdown(msg["content"])
                 
-        if prompt := st.chat_input("Query the system (e.g., 'Did I overspend?')..."):
+        if prompt := st.chat_input("Query the system..."):
             st.chat_message("user").markdown(prompt)
             st.session_state.messages.append({"role": "user", "content": prompt})
-            resp = chatbot_response(USERNAME, prompt, api_key=server_api_key)
+            resp = chatbot_response(USERNAME, prompt)
             with st.chat_message("assistant"):
                 st.markdown(resp)
             st.session_state.messages.append({"role": "assistant", "content": resp})
